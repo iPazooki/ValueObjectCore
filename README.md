@@ -75,3 +75,7 @@ public void Equals_WhenCalledWithEqualValueObjects_ReturnsTrue()
       Assert.True(result);
   }
 ```
+
+### Contributing
+
+Please feel free to contribute this project by forking it or give it a star if you find it useful :)
