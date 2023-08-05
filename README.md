@@ -76,6 +76,6 @@ public void Equals_WhenCalledWithEqualValueObjects_ReturnsTrue()
   }
 ```
 
-### Contributing
+## Contribution
 
-Please feel free to contribute this project by forking it or give it a star if you find it useful :)
+You are encouraged to contribute to this project by forking it or giving it a star if you find it valuable :)
