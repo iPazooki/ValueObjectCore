@@ -10,10 +10,10 @@
     <Version>1.0.0</Version>
     <Authors>ipazooki</Authors>
     <Description>A value object is a design pattern that represents an immutable object with equality based on its state, not its identity. This is a base class for value objects</Description>
-    <Copyright>MIT</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/iPazooki/ValueObjectCore</RepositoryUrl>
     <PackageTags>ValueObject;DDD;value-object</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
