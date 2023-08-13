@@ -1,3 +1,8 @@
+![Nuget](https://img.shields.io/nuget/v/ValueObjectCore)
+![GitHub](https://img.shields.io/github/license/ipazooki/ValueObjectCore)
+![GitHub contributors](https://img.shields.io/github/contributors/ipazooki/valueobjectcore)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/ipazooki/ValueObjectCore/dotnet.yml)
+
 ## What is a value object?
 
 A value object is a design pattern that represents an immutable object with equality based on its state, not its identity. This means that two value objects are equal if they have the same properties and values, regardless of their references. For example, two money objects with the same amount and currency are equal, even if they are different instances.
@@ -46,6 +51,12 @@ public void Equals_WhenCalledWithEqualValueObjects_ReturnsTrue()
   }
 ```
 
-## Contribution
+### Contribution
+👍 You are encouraged to contribute to this project by forking it or giving it a star if you find it valuable :)
 
-You are encouraged to contribute to this project by forking it or giving it a star if you find it valuable :)
+### Social Media
+
+[![Email](https://img.shields.io/badge/Email-gray?logo=gmail&style=flat-square)](mailto:ipazooki@gmail.com)
+[![Stack Overflow](https://img.shields.io/badge/Stackoverflow-gray?logo=stackoverflow&style=flat-square)](https://stackoverflow.com/users/1424065/mrp)
+[![Linkedin](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/pazooki)](https://www.linkedin.com/in/pazooki/)
+![Twitter Follow](https://img.shields.io/twitter/follow/ipazooki)
