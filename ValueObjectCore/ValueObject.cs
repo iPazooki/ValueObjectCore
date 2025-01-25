@@ -12,7 +12,7 @@ public abstract class ValueObject : IEquatable<ValueObject>
     /// Gets the atomic values that define the state of the value object.
     /// </summary>
     /// <returns>An IEnumerable containing the atomic values of the value object.</returns>
-    public abstract IEnumerable<object> GetAtomicValues();
+    public abstract IEnumerable<object?> GetAtomicValues();
 
     /// <summary>
     /// Determines whether this value object is equal to another value object.
@@ -31,16 +31,16 @@ public abstract class ValueObject : IEquatable<ValueObject>
     /// <returns>True if the object is a value object and they are equal; otherwise, false.</returns>
     public override bool Equals(object? obj)
     {
-        return obj is not null && obj is ValueObject other && ValueObjectsAreEqual(other);
+        return obj is ValueObject other && ValueObjectsAreEqual(other);
     }    
 
-    // <summary>
+    /// <summary>
     /// Calculates the hash code for this value object.
     /// </summary>
     /// <returns>The hash code for the value object.</returns>
     public override int GetHashCode()
     {
-        return GetAtomicValues().Aggregate(default(int), HashCode.Combine);
+        return GetAtomicValues().Aggregate(0, HashCode.Combine);
     }
 
     /// <summary>

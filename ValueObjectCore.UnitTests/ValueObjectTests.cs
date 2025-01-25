@@ -1,84 +1,66 @@
-namespace ValueObjectCore.Tests;
-
-public class ValueObjectTests
+namespace ValueObjectCore.UnitTests
 {
-    [Fact]
-    public void Equals_WhenCalledWithNull_ReturnsFalse()
+    public class ValueObjectTests
     {
-        // Arrange
-        var valueObject = new SampleValueObject();
+        private class TestValueObject(IEnumerable<object?> values) : ValueObject
+        {
+            public override IEnumerable<object?> GetAtomicValues()
+            {
+                return values;
+            }
+        }
 
-        // Act
-        var result = valueObject.Equals(null);
+        [Fact]
+        public void Equals_ReturnsTrue_ForEqualValueObjects()
+        {
+            var valueObject1 = new TestValueObject([1, "test", null]);
+            var valueObject2 = new TestValueObject([1, "test", null]);
 
-        // Assert
-        Assert.False(result);
-    }
+            Assert.True(valueObject1.Equals(valueObject2));
+        }
 
-    [Fact]
-    public void Equals_WhenCalledWithSameInstance_ReturnsTrue()
-    {
-        // Arrange
-        var valueObject = new SampleValueObject();
+        [Fact]
+        public void Equals_ReturnsFalse_ForDifferentValueObjects()
+        {
+            var valueObject1 = new TestValueObject([1, "test", null]);
+            var valueObject2 = new TestValueObject([2, "test", null]);
 
-        // Act
-        var result = valueObject.Equals(valueObject);
+            Assert.False(valueObject1.Equals(valueObject2));
+        }
 
-        // Assert
-        Assert.True(result);
-    }
+        [Fact]
+        public void Equals_ReturnsFalse_WhenOtherIsNull()
+        {
+            var valueObject = new TestValueObject([1, "test", null]);
 
-    [Fact]
-    public void Equals_WhenCalledWithEqualValueObjects_ReturnsTrue()
-    {
-        // Arrange
-        var valueObject1 = new SampleValueObject();
-        var valueObject2 = new SampleValueObject();
+            Assert.False(valueObject.Equals(null));
+        }
 
-        // Act
-        var result = valueObject1.Equals(valueObject2);
+        [Fact]
+        public void GetHashCode_ReturnsSameHashCode_ForEqualValueObjects()
+        {
+            var valueObject1 = new TestValueObject([1, "test", null]);
+            var valueObject2 = new TestValueObject([1, "test", null]);
 
-        // Assert
-        Assert.True(result);
-    }
+            Assert.Equal(valueObject1.GetHashCode(), valueObject2.GetHashCode());
+        }
 
-    [Fact]
-    public void Equals_WhenCalledWithDifferentValueObjects_ReturnsFalse()
-    {
-        // Arrange
-        var valueObject1 = new SampleValueObject();
-        var valueObject2 = new SampleValueObject { PropertyOne = "Different" };
+        [Fact]
+        public void GetHashCode_ReturnsDifferentHashCode_ForDifferentValueObjects()
+        {
+            var valueObject1 = new TestValueObject([1, "test", null]);
+            var valueObject2 = new TestValueObject([2, "test", null]);
 
-        // Act
-        var result = valueObject1.Equals(valueObject2);
+            Assert.NotEqual(valueObject1.GetHashCode(), valueObject2.GetHashCode());
+        }
 
-        // Assert
-        Assert.False(result);
-    }
+        [Fact]
+        public void Equals_ReturnsFalse_ForDifferentTypes()
+        {
+            var valueObject = new TestValueObject([1, "test", null]);
+            var differentTypeObject = new object();
 
-    [Fact]
-    public void GetHashCode_WhenCalled_ReturnsHashCode()
-    {
-        // Arrange
-        var valueObject = new SampleValueObject();
-
-        // Act
-        var result = valueObject.GetHashCode();
-
-        // Assert
-        Assert.Equal(valueObject.GetAtomicValues().Aggregate(0, (x, y) => HashCode.Combine(x, y)), result);
-    }
-}
-
-internal sealed class SampleValueObject : ValueObject
-{
-    public string PropertyOne { get; set; } = "PropertyOne";
-
-    public int PropertyTwo { get; set; } = 2;
-
-    public override IEnumerable<object> GetAtomicValues()
-    {
-        yield return PropertyOne;
-        yield return PropertyTwo;
+            Assert.False(valueObject.Equals(differentTypeObject));
+        }
     }
 }
